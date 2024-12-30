@@ -1,0 +1,47 @@
+
+<section class="hero is-warning is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-4-desktop is-3-widescreen box">
+           <h2 class="is-size-3 has-text-centered">Iniciar Sesion</h2><br>
+            <p class="alert"><%= alert%></p>
+
+
+   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+       
+     <div class="field has-text-weight-bold has-text-centered">
+       <%= f.label :email %><br />
+       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+     </div>
+
+
+     <div class="field has-text-weight-bold has-text-centered">
+       <%= f.label :password, "Contraseña" %><br />
+       <%= f.password_field :password, autocomplete: "current-password" %>
+     </div>
+
+     <!--<div class=has-text-centered>
+       <% if devise_mapping.rememberable? %>
+         <div class="field">
+           <%= f.check_box :remember_me %>
+           <%= f.label :remember_me, "Recordarme" %>
+         </div>
+       <% end %>
+     </div>-->
+
+     <div class="actions has-text-centered">
+       <%= f.submit "Iniciar Sesion", data: {turbo: false}, class:"button is-warning is-outlined is-light" %>
+     </div>
+   <% end %>
+   <br>
+   <div class=has-text-centered>
+    <%= render "users/shared/links" %>
+   </div>
+   
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>

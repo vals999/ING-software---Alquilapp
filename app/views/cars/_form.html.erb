@@ -1,0 +1,86 @@
+<div class = "text-center">
+    <section class="hero is-warning ">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-5-tablet is-4-desktop is-4-widescreen box">
+
+                      <%= form_with(model: car) do |form| %>
+                        <% if car.errors.any? %>
+                          <div style="color: red">
+                            <h2><%= pluralize(car.errors.count, "error") %></h2>
+
+                            <ul>
+                              <% car.errors.each do |error| %>
+                                <li><%= error.full_message %></li>
+                              <% end %>
+                            </ul>
+                          </div>
+                        <% end %>
+
+                        <div class = "has-text-weight-bold">
+                          <%= form.label :patent,"Patente", style: "display: block" %>
+                          <%= form.text_field :patent %>
+                        </div>
+
+                        <div class = "has-text-weight-bold">
+                          <%= form.label :brand,"Marca", style: "display: block" %>
+                          <%= form.text_field :brand %>
+                        </div>
+
+                        <div class = "has-text-weight-bold">
+                          <%= form.label :model_car,"Modelo", style: "display: block" %>
+                          <%= form.text_field :model_car %>
+                        </div>
+
+
+                        <div class = "has-text-weight-bold">
+                          <%= form.label :seats, "Asientos", style: "display: block" %>
+                          <%= form.number_field :seats, :min => 2, :max => 12 %>
+                        </div>
+
+                        <div class = "has-text-weight-bold">
+                          <%= form.label :transmision, "Transmisión", style: "display: block" %>
+                          <%= form.text_field :transmision %>
+                        </div>
+
+                        <div class = "has-text-weight-bold">
+                          <%= form.label :fuel, "Tipo de combustible", style: "display: block" %>
+                          <%= form.text_field :fuel %>
+                        </div>
+
+                        <div class = "has-text-weight-bold">
+                          <%= form.hidden_field :is_available, value: true %>
+                        </div>
+
+                        <div class = "has-text-weight-bold">
+                          <label> Esta activado <%= form.check_box :is_enable %> </label>
+                        </div>
+
+                        <div class = "has-text-weight-bold">
+                          <%= form.label :color, "Color", style: "display: block" %>
+                          <%= form.text_field :color %>
+                        </div>
+
+                        <div class = "has-text-weight-bold">
+                          <%= form.label :car_number, "Numero de auto (VIN)", style: "display: block" %>
+                          <%= form.number_field :car_number, :min => 1 %>
+                        </div>
+
+                        <div class = "has-text-weight-bold">
+                          <%= form.label :year_model, "Año del modelo", style: "display: block" %>
+                          <%= form.number_field :year_model, :min => 1 %>
+                        </div>
+
+                        <br>
+                        <div>
+                          <%= form.submit "Confirmar", class: "button is-warning is-outlined is-light" ,data: { turbo_confirm:'Estas seguro de que desea guardar los cambios?' }%>
+                        </div>
+  
+                      <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+</div>

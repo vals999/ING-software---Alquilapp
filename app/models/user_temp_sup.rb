@@ -1,0 +1,3 @@
+class UserTempSup < ApplicationRecord
+    
+end

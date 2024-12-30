@@ -1,0 +1,72 @@
+<nav class="navbar navbar-light is-warning">
+  <a class="navbar-brand" href="">
+    <%= image_submit_tag('ACA.png')%>
+    <div class= "text-right">
+         <%= link_to "Cerrar sesión", destroy_user_session_path, 'data-turbo.method': :delete, class:"button is-warning is-outlined is-light"%>
+    </div>
+  </a>
+</nav>
+<% flash.each do |type, msg| %>
+  <% if type=="danger" %>
+    <div class="alert alert-danger">
+       <%= msg %>
+    </div>
+  <%end%>
+  <% if type=="notice" %>
+    <div class="alert alert-success">
+     <%= msg %>
+    </div>
+  <%end%>
+<% end %>
+<br>
+<%= link_to "Agregar Supervisor",  new_user_temp_sup_path,class:"button is-warning is-outlined is-light" %>
+<% if @supervisores.where(role: "supervisor").count>0 %>
+<div class= "text-center">
+<h1>Supervisores contratados</h1>
+</div>
+<div class="table-wrapper">
+    <table class="table table-bordered">
+     <thead class="table-bordered">
+        <tr class="table-warning">
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Reclamo activo</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+        </tr>
+     </thead>
+       <tbody>
+        <% @supervisores.each  do |s| %>
+         <tr>
+            <td><%= s.name%></td>
+            <td><%= s.last_name %> </td>
+            <td><%= s.dni_nro%></td>
+            <td><%= if s.reclamo
+                      "Si"
+                    else
+                      "No"
+                    end
+            %></td>
+            <td>
+            <%= link_to 'Eliminar', url_for(action: :deleteSup, id: s.id), data: {turbo_method: :deleteSup, turbo_confirm: 'Esta seguro que desea eliminar el supervisor?'}, class: "button is-warning is-outlined is-light"%>
+            </td>
+            <td><%= link_to "Editar",  user_admin_editEmployees_path(s),class: "button is-warning is-outlined is-light", method: :userAdmin_editEmployees %></td>
+         </tr>
+        <% end %>
+       </tbody>
+   </table>
+   </div>
+<% else %>
+<div class= "text-center">
+<h1>No hay supervisores registrados</h1>
+</div>
+<% end %>
+    <br>
+<div class="field has-text-weight-bold actions text-center">
+<%= link_to "Volver", user_admin_path ,class: "button is-warning is-outlined is-light"%>
+</div>
+
+
+   
+

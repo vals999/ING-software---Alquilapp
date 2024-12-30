@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @user_temp_admin %>
+
+<div>
+  <%= link_to "Edit this user temp admin", edit_user_temp_admin_path(@user_temp_admin) %> |
+  <%= link_to "Back to user temp admins", user_temp_admins_path %>
+
+  <%= button_to "Destroy this user temp admin", @user_temp_admin, method: :delete %>
+</div>

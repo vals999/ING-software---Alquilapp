@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patent: MyString
+  brand: MyString
+  model_car: MyString
+  string: MyString
+  seats: 1
+  transmision: MyString
+  fuel: MyString
+  is_available: false
+  is_enable: false
+  color: MyString
+  car_number: 1
+  year_model: MyString
+  integer: MyString
+
+two:
+  patent: MyString
+  brand: MyString
+  model_car: MyString
+  string: MyString
+  seats: 1
+  transmision: MyString
+  fuel: MyString
+  is_available: false
+  is_enable: false
+  color: MyString
+  car_number: 1
+  year_model: MyString
+  integer: MyString

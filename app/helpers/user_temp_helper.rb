@@ -1,0 +1,2 @@
+module UserTempHelper
+end

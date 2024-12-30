@@ -1,0 +1,110 @@
+<nav class="navbar navbar-light is-warning">
+  <a class="navbar-brand" href="">
+    <%= image_submit_tag('ACA.png')%>
+    <div class= "text-right">
+         <%= link_to "Cerrar sesión", destroy_user_session_path, 'data-turbo.method': :delete, class:"button is-warning is-outlined is-light"%>
+    </div>
+  </a>
+</nav>
+<% flash.each do |type, msg| %>
+ <%if type=="danger" %>
+   <div class="alert alert-danger">
+     <%= msg %>
+   </div>
+  <%end%>
+  <% if type=="notice" %>
+    <div class="alert alert-success">
+     <%= msg %>
+    </div>
+  <%end%>
+<% end %>
+
+<br>
+<%= link_to "Agregar Auto", new_car_path, class:"button is-warning is-outlined is-light" %>
+<% if @cars.count>0 %>
+<h1 class="text-center">Lista de autos</h1>
+<div class="table-wrapper">
+<table class="table table-bordered">
+  <thead class="table-bordered">
+    <tr class="table-warning">
+      <th scope="col">Número de auto</th>
+      <th scope="col">Patente</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">Cantidad de asientos</th>
+      <th scope="col">Caja de transmision</th>
+      <th scope="col">Combustible</th>
+      <th scope="col">Disponible</th>
+      <th scope="col">Activado</th>
+      <th scope="col">Color</th>
+      <th scope="col">Año del modelo</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cars.each do |c| %>
+      <tr>
+        <td><%=c.car_number%></td>
+        <td><%=c.patent%></td>
+        <td><%=c.brand%></td>
+        <td><%=c.model_car%></td>
+        <td><%=c.seats%></td>
+        <td><%=c.transmision%></td>
+        <td><%=c.fuel%></td>
+        <td><%=if c.is_available 
+                  "Si"
+               else
+                  "No"
+               end
+         %></td>
+        <td><%=if c.is_enable
+                "Si"
+                else 
+                  "No"
+                end
+         %></td>
+        <td><%=c.color%></td>
+        <td><%=c.year_model%></td>
+        <td> <% if c.is_available%>
+                <%=link_to "Editar", edit_car_path(c), class:"button is-warning is-outlined is-light" %>
+             <% else%>
+               <%=link_to "Editar", edit_car_path(c), class:"button is-warning is-outlined is-light isDisabled" %>
+             <% end%>
+        </td>
+        <% if c.is_enable%>
+        <td>
+              <%= link_to 'Pausar auto', url_for(action: :changeEnable, id: c.id), data: {turbo_method: :changeEnable, turbo_confirm: 'Esta seguro que desea pausar el auto?'}, class: "button is-warning is-outlined is-light"%>
+        </td>
+        <% else %>
+        <td>
+              <%= link_to 'Activar auto', url_for(action: :changeEnable, id: c.id), data: {turbo_method: :cahngeEnable, turbo_confirm: 'Esta seguro que desea activar el auto?'}, class: "button is-warning is-outlined is-light"%>  
+        </td>
+        <% end %>
+        <td><!--<%=link_to "Eliminar", cars_delete_path(c.id),  class:"button is-warning is-outlined is-light",data: { turbo_confirm:'Estas seguro de que desea eliminar el auto?' } %>-->
+            <%= link_to 'Eliminar auto', url_for(action: :deleteCar, id: c.id), data: {turbo_method: :deleteCar, turbo_confirm: 'Esta seguro que desea eliminar el auto?'}, class: "button is-warning is-outlined is-light"%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<% else %>
+    <div class= "text-center">
+        <h1>No hay autos registrados</h1>
+    </div>
+<% end %>
+    <br>
+<% if current_user %>
+      <% if current_user.role == "supervisor" %>
+          <div class = "text-center">
+              <%= link_to "Volver",  user_supervisor_path, class: "button is-warning is-outlined is-light" %>
+          </div>
+      <% end %>
+      <%if current_user.role == "administrador" %>
+          <div class = "text-center">
+              <%= link_to "Volver",  user_admin_path, class: "button is-warning is-outlined is-light" %>
+          </div>
+      <% end %>
+<% end %>

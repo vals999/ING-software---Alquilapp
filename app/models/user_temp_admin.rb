@@ -1,0 +1,2 @@
+class UserTempAdmin < ApplicationRecord
+end

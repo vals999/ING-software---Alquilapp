@@ -1,0 +1,50 @@
+<nav class="navbar navbar-light is-warning">
+  <a class="navbar-brand" href="">
+    <%= image_submit_tag('ACA.png')%>
+  </a>
+</nav>
+<br>
+
+<script type='text/javascript'>
+(() => {
+    if (window.localStorage) {
+
+        // If there is no item as 'reload'
+        // in localstorage then create one &
+        // reload the page
+        if (!localStorage.getItem('reload')) {
+            localStorage['reload'] = true;
+            window.location.reload();
+        } else {
+
+            // If there exists a 'reload' item
+            // then clear the 'reload' item in
+            // local storage
+            localStorage.removeItem('reload');
+        }
+    }
+})(); // Calling anonymous function here only
+</script>
+<div class = "text-center">
+  <%= link_to "Volver",  user_usuario_path, class:"button is-warning is-outlined is-light" %>
+</div>
+
+<!-- SDK MercadoPago.js V2-->
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+<script>
+  const mp = new MercadoPago('APP_USR-ca82f811-b4aa-4024-9d1b-4ec8b96b3e7f', {
+    locale: 'es-AR'
+  });
+
+  mp.checkout({
+    preference: {
+      id: '<%= @preference_id %>' 
+    },
+    autoOpen: true,
+  });
+</script>
+
+
+
+

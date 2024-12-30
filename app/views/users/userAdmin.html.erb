@@ -1,0 +1,39 @@
+<nav class="navbar navbar-light is-warning">
+  <a class="navbar-brand" href="">
+    <%= image_submit_tag('ACA.png')%>
+    <div class= "text-right">
+         <%= link_to "Cerrar sesión", destroy_user_session_path, 'data-turbo.method': :delete, class:"button is-warning is-outlined is-light" %>
+    </div>
+  </a>
+</nav>
+<% flash.each do |type, msg| %>
+  <% if type=="danger" %>
+    <div class="alert alert-danger">
+       <%= msg %>
+    </div>
+  <%end%>
+  <% if type=="notice" %>
+    <div class="alert alert-success">
+     <%= msg %>
+    </div>
+  <%end%>
+<% end %>
+<br>
+
+
+<button class="button is-warning is-outlined is-light isDisabled"><%= I18n.l(Date.today, format: '%d-%m-%Y') %> Hora: <%= Time.now.strftime("%H:%M") %></button>
+
+
+<h3 class = "text-center"> Bienvenido administrador <%= @admin.name%> <%=@admin.last_name %></h3>
+
+<br>
+<div class= "text-center">
+ <%= link_to "Listado de autos", cars_path, class:"button is-warning is-outlined is-light"%>
+ <%= link_to "Lista Supervisores", user_admin_lista_path,class:"button is-warning is-outlined is-light" %>
+ <%= link_to "Lista Administradores", user_admin_listaAdmin_path, class:"button is-warning is-outlined is-light" %>
+ 
+</div>
+
+
+
+

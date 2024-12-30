@@ -1,0 +1,67 @@
+<nav class="navbar navbar-light is-warning">
+  <a class="navbar-brand" href="">
+    <%= image_submit_tag('ACA.png')%>
+    <div class= "text-right">
+         <%= link_to "Cerrar sesión", destroy_user_session_path, 'data-turbo.method': :delete, class:"button is-warning is-outlined is-light"%>
+    </div>
+  </a>
+</nav>
+<% flash.each do |type, msg| %>
+  <% if type=="danger" %>
+    <div class="alert alert-danger">
+       <%= msg %>
+    </div>
+  <%end%>
+  <% if type=="warning" %>
+  <div class="alert alert-warning">
+     <%= msg %>
+  </div>
+  <%end%>
+  <% if type=="notice" %>
+    <div class="alert alert-success">
+     <%= msg %>
+    </div>
+  <%end%>
+<% end %>
+<br>
+ 
+<button class="button is-warning is-outlined is-light isDisabled"><%= I18n.l(Date.today, format: '%d-%m-%Y') %> Hora: <%= Time.now.strftime("%H:%M") %></button>
+
+
+
+<h3 class="text-center"> Bienvenido usuario <%= @usuario.name%> <%=@usuario.last_name %></h3>
+
+<br>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Saldo actual: </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>$<%= @usuario.saldo %></h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<br>
+<div class= "text-center">
+<button type="button" class="button is-warning is-outlined is-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Consultar saldo
+</button>
+  <%= link_to "Cargar saldo",elegir_saldo_path(@usuario), class:"button is-warning is-outlined is-light" %>
+  <%= link_to "Actualizar licencia",  user_usuario_actualizarLicencia_path,class:"button is-warning is-outlined is-light" %>
+</div>
+<br><br>
+<%if (@usuario.vencimiento_licencia.mday <(I18n.l(Date.today, format: '%d')).to_i)&&(@usuario.vencimiento_licencia.mon <=(I18n.l(Date.today, format: '%m')).to_i)&&(@usuario.vencimiento_licencia.year <=(I18n.l(Date.today, format: '%Y')).to_i)%>
+     <% @usuario.hayLicencia=false %>
+     <% @usuario.save%>
+     <div class="alert alert-danger text-center" role="alert">
+       <h6>Tu licencia esta vencida. Para alquilar un auto actualice su licencia </h6>
+     </div>
+<%end%>

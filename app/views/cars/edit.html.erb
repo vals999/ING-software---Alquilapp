@@ -1,0 +1,23 @@
+<nav class="navbar navbar-light is-warning">
+  <a class="navbar-brand" href="">
+    <%= image_submit_tag('ACA.png')%>
+    <div class= "text-right">
+         <%= link_to "Cerrar sesión", destroy_user_session_path, 'data-turbo.method': :delete, class:"button is-warning is-outlined is-light"%>
+    </div>
+  </a>
+</nav>
+<section class="hero is-warning ">
+    <div class="hero-body">
+        <h3 class = "text-center">Editar auto</h3><br>
+
+
+        <%= render "form", car: @car %>
+
+
+        <div class = "text-center">
+            <%= link_to "Volver",  cars_path, class: "button is-warning is-outlined is-light" %>
+        </div>
+
+    </div>
+</section>
+

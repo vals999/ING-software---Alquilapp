@@ -1,0 +1,51 @@
+<nav class="navbar navbar-light is-warning">
+  <a class="navbar-brand" href="">
+    <%= image_submit_tag('ACA.png')%>
+    <div class= "text-right">
+         <%= link_to "Cerrar sesión", destroy_user_session_path, 'data-turbo.method': :delete, class:"button is-warning is-outlined is-light"%>
+    </div>
+  </a>
+</nav>
+<div class="text-center">
+<section class="hero is-warning is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-4-desktop is-4-widescreen box">
+<h2 class="is-size-3">Actualizar licencia de conducir</h2><br>
+ <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+   <%= render "users/shared/error_messages", resource: resource %>
+
+
+   <div class="field has-text-weight-bold">
+     <%= f.label :license,"Foto de licencia de conducir" %><br>
+     <%= f.file_field :license %>
+       <%= link_to "Ver", rails_blob_path(current_user.license.blob, disposition: 'preview') %>
+   </div> 
+    
+   <div class="field has-text-weight-bold has-text-centered">
+    <%= f.label :vencimiento_licencia,"Fecha de vencimiento Licencia" %><br>
+    <%= f.date_field :vencimiento_licencia %><br><br>
+   </div>
+   
+   <%= f.hidden_field :licencia_rechazada, value: false %>
+
+   <div class="field has-text-weight-bold">
+     <%= f.label :current_password, "Contraseña actual"%> <i>(para confirmar sus cambios)</i><br />
+     <%= f.password_field :current_password, autocomplete: "current-password" %>
+   </div>
+
+   <div class="actions">
+     <%= f.submit "Editar",class:"button is-warning is-outlined is-light",data: { turbo_confirm:'Estas seguro de que desea guardar cambios?' }%>
+   </div>
+ <% end %>
+
+ <br>
+
+ <%= link_to "Cancelar", :back %>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>

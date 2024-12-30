@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>User temp sups</h1>
+
+<div id="user_temp_sups">
+  <% @user_temp_sups.each do |user_temp_sup| %>
+    <%= render user_temp_sup %>
+    <p>
+      <%= link_to "Show this user temp sup", user_temp_sup %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New user temp sup", new_user_temp_sup_path %>

@@ -1,0 +1,63 @@
+<div class="text-center has-text-weight-bold ">
+<section class="hero is-warning is-fullheight is-small">
+  <div class="hero-body ">
+    <div class="container">
+      <div class="columns is-centered ">
+        <div class="column is-5-tablet is-4-desktop is-4-widescreen box">
+<%= form_with(model: user_temp_admin) do |form| %>
+  <% if user_temp_admin.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user_temp_admin.errors.count, "errores") %></h2>
+
+      <ul>
+        <% user_temp_admin.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name,"Nombre",style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :last_name,"Apellido",style: "display: block" %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= form.label :dni_nro,"DNI", style: "display: block" %>
+    <%= form.text_field :dni_nro %>
+  </div>
+
+  <div>
+    <%= form.label :email, "Email", style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :password,"Contraseña", style: "display: block" %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div>
+    <%= form.label :password_confirmation,"Confirmar contraseña",style: "display: block" %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit "Crear", class:"button is-warning is-outlined is-light",data: { turbo_confirm:'Estas seguro de que desea agregar un administrador?' }%>
+  </div>
+  <br>
+  <div class = "text-center ">
+          <%= link_to "Volver",  user_admin_listaAdmin_path, class: "button is-warning is-outlined is-light" %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>

@@ -1,0 +1,59 @@
+<nav class="navbar navbar-light is-warning">
+  <a class="navbar-brand" href="">
+    <%= image_submit_tag('ACA.png')%>
+    <div class= "text-right">
+         <%= link_to "Cerrar sesión", destroy_user_session_path, 'data-turbo.method': :delete, class:"button is-warning is-outlined is-light" %>
+    </div>
+  </a>
+</nav>
+
+<% flash.each do |type, msg| %>
+ <%if type=="danger" %>
+   <div class="alert alert-danger">
+     <%= msg %>
+   </div>
+  <%end%>
+  <% if type=="notice" %>
+    <div class="alert alert-success">
+     <%= msg %>
+    </div>
+  <%end%>
+<% end %>
+<br>
+
+<h1 class="text-center">Licencias Nuevas</h1>
+<div class="table-wrapper">
+    <table class="table table-bordered">
+        <thead class="table-bordered">
+            <tr class="table-warning">
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Vencimiento Licencia</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>  
+        <tbody>  
+            <% @usuarios.each  do |u| %>
+            <tr>
+                <td><%= u.name%></td>
+                <td><%= u.last_name %> </td>
+                <td><%= u.dni_nro%></td>
+                <td><%= u.vencimiento_licencia%></td>
+                <td><%= link_to "Ver", rails_blob_path(u.license.blob, disposition: 'preview'), class:"button is-warning is-outlined is-light" %></td>
+                <td>
+                    <%= link_to 'Validar licencia', url_for(action: :validarLic, id: u.id), data: {turbo_method: :validarLic, turbo_confirm: 'Esta seguro que desea validar la licencia?'}, class: "button is-warning is-outlined is-light"%>
+                </td>
+                <td>
+                    <%= link_to 'Rechazar licencia', url_for(action: :rechazarLic, id: u.id), data: {turbo_method: :rechazarLic, turbo_confirm: 'Esta seguro que desea rechazar la licencia?'}, class: "button is-warning is-outlined is-light"%>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>
+    <div class = "text-center">
+              <%= link_to "Volver",  user_supervisor_path, class: "button is-warning is-outlined is-light" %>
+          </div>

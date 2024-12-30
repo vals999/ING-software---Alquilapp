@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @user_temp_sup %>
+
+<div>
+  <%= link_to "Edit this user temp sup", edit_user_temp_sup_path(@user_temp_sup) %> |
+  <%= link_to "Back to user temp sups", user_temp_sups_path %>
+
+  <%= button_to "Destroy this user temp sup", @user_temp_sup, method: :delete %>
+</div>
