@@ -32,4 +32,4 @@ Luego, se realizo una modalidad de Scrum, la cual tuvo 3 sprint en la que el cli
 
 Se realizo tambien la especificación de requisitos de software (SRS) y el plan de gestión de proyecto (PGP)
 
-https://docs.google.com/document/d/1Rw7ahZdwKJokwpNnxceJfSC5rz9aN_Pl/edit
+https://docs.google.com/document/d/1FcSbEs4ya3EDHh8QMjMtTKYhKUtiXnLBoJcpwtPB0NI/edit?tab=t.0
